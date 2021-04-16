@@ -15,14 +15,14 @@ botones.forEach( btn => {
 
         evaluarClick();
 
-        console.log(valores);
-        console.log(valores2);
     });
 });
 
 function agregarClick( array ){
 
     array.push( valorClick );
+    console.log(valores);
+    console.log(valores2);
 };
 
 function borrarClick( bandera ){
@@ -31,7 +31,6 @@ function borrarClick( bandera ){
 
     if( valores2.length == 0 ){  
     bandera1 = true;
-    console.log(bandera1);
     };
 
     if( bandera1 )valores.pop( valores.length - 1); //El ultimo elemento se borrara.
@@ -56,7 +55,7 @@ function evaluarClick(){
 
     if( valorClick === 'borrar' ) borrarTodo();
 
-    if( valorClick === '+' || valorClick === '-' || valorClick === '*' || valorClick === '/' ) bandera = false ; console.log(bandera);
+    if( valorClick === '+' || valorClick === '-' || valorClick === '*' || valorClick === '/' ) bandera = false ;
 
     if( valorClick === 'resultado'){
         
@@ -65,13 +64,35 @@ function evaluarClick(){
     } 
 };
 
+
 function calcularResultado(){ //Hasta ahora tengo funcionando suma.
+    
+    let concat = '';
+    const nuevcArray = valores.map(  elemento => {
+        
+        concat +=  elemento.toString(); 
+        
+    });
+    console.log( concat );
+    
+    let concat2 = '';
+    const nuevcArray2 = valores2.map(  elemento => {
+        
+        concat2 +=  elemento.toString(); 
+        
+    });
+    const parseado = parseInt(concat);
+    const parseado2 = parseInt(concat2);
 
-    const reduce = valores.reduce( (acc, valor )=> acc + valor);
-    const reduce2 = valores2.reduce( (acc, valor )=> acc + valor);
+    const result = parseado + parseado2;
 
-    const suma = reduce + reduce2;
+    input.value = result.toString();
+
     valores.length = 0;
     valores2.length = 0;
-    input.value = suma.toString();
+
+    concat = 0;
+    concat2 = 0;
+
+    return result;
 };
