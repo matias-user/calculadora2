@@ -1,5 +1,6 @@
 const botones = document.querySelectorAll('button');
 const input = document.querySelector('#input');
+const form = document.querySelector('#form');
 
 let valorClick;
 let valores = [];
@@ -13,10 +14,20 @@ botones.forEach( btn => {
         if( isNaN( e.target.value ) ) valorClick = e.target.value;
         else valorClick = parseInt( e.target.value);
 
-        evaluarClick();
-
+        evaluarClick( );
+        mostrarEnInput( e.target.value  );
     });
 });
+const mostrarEnInput = ( btn ) => {
+
+
+    if( btn != 'borrar' && btn != 'atras' && btn != 'resultado' ){ //para q' no agrege elementos indeseados.
+
+        input.value += btn; //Hasta el momento funciona bien.
+        console.log(btn);
+        
+    }
+};
 
 function agregarClick( array ){
 
@@ -41,6 +52,7 @@ function borrarTodo(){
 
     valores = [];
     valores2 = [];
+    input.value = 0;
 };
 
 function evaluarClick(){
@@ -61,6 +73,7 @@ function evaluarClick(){
         
         calcularResultado();
         bandera = true;
+        
     } 
 };
 
@@ -73,7 +86,6 @@ function calcularResultado(){ //Hasta ahora tengo funcionando suma.
         concat +=  elemento.toString(); 
         
     });
-    console.log( concat );
     
     let concat2 = '';
     const nuevcArray2 = valores2.map(  elemento => {
@@ -86,7 +98,7 @@ function calcularResultado(){ //Hasta ahora tengo funcionando suma.
 
     const result = parseado + parseado2;
 
-    input.value = result.toString();
+    input.value =  result;
 
     valores.length = 0;
     valores2.length = 0;
@@ -96,3 +108,4 @@ function calcularResultado(){ //Hasta ahora tengo funcionando suma.
 
     return result;
 };
+
