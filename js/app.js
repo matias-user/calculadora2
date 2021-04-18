@@ -14,6 +14,13 @@ botones.forEach( btn => {
         if( isNaN( e.target.value ) ) valorClick = e.target.value;
         else valorClick = parseInt( e.target.value);
 
+        let result = calcularResultado();
+
+        if( !isNaN(result) ){
+            // borrarTodo();
+
+        }
+
         evaluarClick( );
         mostrarEnInput( e.target.value  );
     });
@@ -23,8 +30,8 @@ const mostrarEnInput = ( btn ) => {
 
     if( btn != 'borrar' && btn != 'atras' && btn != 'resultado' ){ //para q' no agrege elementos indeseados.
 
-        input.value += btn; //Hasta el momento funciona bien.
-        console.log(btn);
+        input.value = btn;
+         //Hasta el momento funciona bien.
         
     }
 };
@@ -48,11 +55,12 @@ function borrarClick( bandera ){
     else valores2.pop( valores.length - 1);       
         
 };
-function borrarTodo(){
+function borrarTodo( bool = false){
 
     valores = [];
     valores2 = [];
-    input.value = 0;
+    if( bool ) input.value = 0;
+    
 };
 
 function evaluarClick(){
@@ -65,7 +73,7 @@ function evaluarClick(){
 
     if( valorClick === 'atras' ) borrarClick( bandera );
 
-    if( valorClick === 'borrar' ) borrarTodo();
+    if( valorClick === 'borrar' ) borrarTodo( true);
 
     if( valorClick === '+' || valorClick === '-' || valorClick === '*' || valorClick === '/' ) bandera = false ;
 
@@ -73,6 +81,7 @@ function evaluarClick(){
         
         calcularResultado();
         bandera = true;
+        borrarTodo();
         
     } 
 };
@@ -98,13 +107,10 @@ function calcularResultado(){ //Hasta ahora tengo funcionando suma.
 
     const result = parseado + parseado2;
 
-    input.value =  result;
-
-    valores.length = 0;
-    valores2.length = 0;
-
+    input.value = result;
     concat = 0;
     concat2 = 0;
+
 
     return result;
 };
